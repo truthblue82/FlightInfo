@@ -1,0 +1,60 @@
+<div class="loader-container" *ngIf="displayModal">
+  <div class="spinner-border text-light spinner-custom" role="status"></div>
+  <h3>Loading</h3>
+</div>
+
+<div class="login" >
+  <div>
+    <h1>LOGIN</h1>
+    <div class="form">
+      <div class="container">
+        <form #signinForm="ngForm" (ngSubmit)="handleLogin(signinForm)" ngbNativeValidate>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" placeholder="Enter Email" name="email"
+            (keyup)="validateEmail();enableSigninBtn()"
+            required [(ngModel)]="email"
+            />
+            <small *ngIf="!flagEmail" class="error">Invalid Email</small>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">PASSWORD</label>
+            <input class="form-control" type="password"
+              placeholder="Enter Password" name="password"
+              required [(ngModel)]="password"
+            />
+          </div>
+
+          <div class="clearfix formbtn">
+            <button type="submit" class="btn btn-danger">
+              LOGIN
+            </button>
+
+            <button type="reset" class="btn btn-warning">
+              CANCEL
+            </button>
+          </div>
+        </form>
+        <hr />
+        <div class="row social">
+          <span class="loginwith">Sign in with</span>
+          <div id="g_id_onload"
+              data-client_id="653087229203-nba2mi6gls3e0fuft4a5ovb7hdqj6io3.apps.googleusercontent.com"
+              data-context="signin"
+              data-login_uri="http://localhost:5000/add-flight"
+              data-auto_select="true"
+              data-itp_support="true">
+          </div>
+          <div class="g_id_signin"
+            data-type="standard"
+            data-shape="pill"
+            data-theme="filled_blue"
+            data-text="signin_with"
+            data-size="large"
+            data-logo_alignment="left"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

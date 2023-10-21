@@ -1,0 +1,76 @@
+<div class="loader-container" *ngIf="displayModal">
+  <div class="spinner-border text-light spinner-custom" role="status"></div>
+  <h3>Loading</h3>
+</div>
+
+<div class="signup">
+  <div>
+    <h1>SIGN-UP </h1>
+
+    <div class="form" >
+      <div>
+        <form #registerForm="ngForm" (ngSubmit)="SignUp(registerForm)" ngNativeValidate>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input class="form-control" type="email" placeholder="Enter Email" name="email" required
+            #email (keyup)="validateEmail(email);enableSignupBtn()"
+            (blur)="validateEmail(email);enableSignupBtn()"
+            [(ngModel)]="user.email"/>
+            <small *ngIf="!flags.email" class="error">Invalid Email</small>
+          </div>
+
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input class="form-control" type="text" placeholder="Enter First Name" name="firstName" required
+            #firstName (keyup)="validateString(firstName, 'firstName');enableSignupBtn()"
+            (blur)="validateString(firstName, 'firstName');enableSignupBtn()"
+            [(ngModel)]="user.firstName" />
+            <small *ngIf="!flags.firstName" class="error">Invalid First Name</small>
+          </div>
+
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input class="form-control" type="text" placeholder="Enter Last Name" name="lastName" required
+            #lastName (keyup)="validateString(lastName, 'lastName');enableSignupBtn()"
+            (blur)="validateString(lastName, 'lastName');enableSignupBtn()"
+            [(ngModel)]="user.lastName" />
+            <small *ngIf="!flags.lastName" class="error">Invalid Last Name</small>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input class="form-control" type="password" placeholder="Enter Password"
+              name="password" required [(ngModel)]="user.password"
+              />
+              <small *ngIf="!flags.password" class="error">Invalid Password</small>
+          </div>
+
+          <div class="mb-3">
+            <label for="repeatpassword" class="form-label">Repeat Password</label>
+            <input class="form-control" type="password" placeholder="Repeat Password"
+              name="repeatpassword" required [(ngModel)]="repeatPassword"
+              (blur)="comparePassword(); enableSignupBtn()"
+              (keyup)="comparePassword(); enableSignupBtn()"/>
+              <small *ngIf="!flags.repeatPassword" class="error">Repeat password is not match</small>
+          </div>
+
+          <p style="font-weight: bolder; padding-bottom: 10px;">
+            By creating an account you agree to our
+            <a href="#" style="color: dodgerblue">Terms & Privacy</a>.
+          </p>
+
+          <div class="clearfix formbtn">
+              <button [disabled]="!flags.signupBtn"
+              class="btn btn-danger" >
+                REGISTER
+              </button>
+              <button type="reset" class="btn btn-warning" >
+                CANCEL
+              </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

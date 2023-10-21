@@ -1,0 +1,50 @@
+.cancelbtn {
+  padding: 14px 20px;
+}
+.form {
+  border: 0px solid #ccc;
+  padding-top: 20px
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.formbtn {
+  text-align: center;
+  margin-left: 46%;
+  transform: translateX(-30%);
+}
+.signup {
+  background-size: cover;
+  padding-top: 5em;
+  padding-bottom: 5em;
+  margin: 3px 0px;
+}
+.signup > div {
+  width: 40%;
+  margin: auto;
+  background: rgb(246, 246, 246);
+  border-radius: 10px;
+  padding: 50px;
+  box-shadow: 0px 0px 10px #333;
+  text-align: center;
+}
+.signup > div h1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 28px;
+  font-weight: bolder;
+}
+.form-label {
+  float: left;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 300px) {
+  .cancelbtn,
+  .signupbtn {
+    width: 100%;
+  }
+}

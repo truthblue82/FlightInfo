@@ -1,0 +1,79 @@
+<!-- HEADER -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+/>
+
+<nav class="navbar is-info" role="navigation" aria-label="main navigation">
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <div class="navbar-item">
+        <a>
+          <h3 routerLink="/">Home</h3>
+        </a>
+      </div>
+
+      <div
+        *ngIf="user.length > 0 "
+        class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          <h3>Flight Detail</h3>
+        </a>
+      </div>
+
+      <div
+        *ngIf="user.length > 0"
+        class="navbar-item has-dropdown is-hoverable"
+      >
+        <a class="navbar-link">
+          <h3>Flight Management</h3>
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item" routerLink="/add-flight"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div *ngIf="user.length === 0" class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary" routerLink="/signup">
+            <strong>Sign up</strong>
+          </a>
+          <a class="button is-primary" routerLink="/signin">
+            <strong>Sign In</strong>
+          </a>
+        </div>
+      </div>
+
+      <div *ngIf="user.length > 0" class="navbar-item">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            <span style="margin-right: 20px; font-weight: bold; font-size: 18px"
+              >Welcome, {{ user[0].username }}</span
+            >
+            <img
+              src="../../../assets/images/profilePhoto.jpg"
+              alt="profileImage"
+              class="profileImage"
+            />
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" routerLink="/profile">Profile</a>
+
+            <hr class="navbar-divider" />
+            <a class="navbar-item is-primary"
+              (click)="handleSignOut()" >
+              <strong>Logout</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- HEADER -->
