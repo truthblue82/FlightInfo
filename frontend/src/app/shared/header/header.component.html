@@ -9,8 +9,8 @@
   <button mat-raised-button routerLink="/signup">Sign Up</button>
   <button mat-raised-button routerLink="/signin">Sign In</button>
 
-  <mat-chip [matMenuTriggerFor]="userMenu">
-    <img matChipAvatar src="../../../assets/images/profilePhoto.jpg" width="26" />
+  <mat-chip [matMenuTriggerFor]="userMenu" color="accent">
+    <img matChipAvatar src="../../../assets/images/profilePhoto.jpg" class="profileImg" />
     Welcome, {{firstName}}
   </mat-chip>
   <mat-menu #userMenu="matMenu">

@@ -20,7 +20,7 @@ export class AddFlightComponent implements OnInit {
     private appTitle: Title,
     private toastr: ToastrService
   ) {
-    this.appTitle.setTitle('Flight Info - Flight Details')
+    this.appTitle.setTitle('Flight Info - Add Flight Details')
     this.airline = '';
     this.arrivalDate = '';
     this.arrivalTime = '';

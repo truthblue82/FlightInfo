@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+//const firebase = require('firebase');
 require('dotenv').config();
 
 
@@ -16,5 +17,4 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   res.status(500).json({error: err.error});
 });
-
-app.listen(process.env.PORT || 3000, () => console.log('Server is running in port ' + process.PORT || 3000));
+app.listen(process.env.PORT || 3000, () => console.log('Server is running in port ' + process.env.PORT || 3000));

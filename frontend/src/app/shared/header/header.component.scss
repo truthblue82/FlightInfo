@@ -14,33 +14,14 @@ a {
   text-decoration: none;
   color: white;
 }
-
 ul {
   display: flex;
 }
-//===
 .profileImg {
   border-radius: 250px;
-  width: 28px;
-  height: 105px;
+  width: 23px;
+  height: 23px;
   box-sizing: border-box;
   transform: scale(1.5);
 }
-h3 {
-  margin-bottom: 5px; font-family: Georgia; font-weight: bolder;
-}
-a,a:hover {
-  text-decoration: none;
-}
-hr.navbar-divider {
-  background-color: #ccc;
-  height: 2px;
-}
-.navbar{
-  background-color: #0f67b0;
-  box-shadow: 0px -3px 10px rgb(113, 113, 113);
-}
-.navbar.is-info {
-  background-color: #0f67b0;
-  color: #fff;
-}
+
