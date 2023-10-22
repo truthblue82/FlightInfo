@@ -48,12 +48,18 @@ export class SignupComponent implements OnInit {
   }
 
   SignUp(form: NgForm): void {
-    const tmp = this.user.email.split('@');
-    const pwdEnc = this.encDecSvc.set(environment.PWS_ENCRIPT_KEY, this.user.password);
+    const user: User = {
+      email: this.user.email,
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      password: this.user.password
+    };
+    //const tmp = this.user.email.split('@');
+    //const pwdEnc = this.encDecSvc.set(environment.PWS_ENCRIPT_KEY, this.user.password);
     //const dbRef = ref(getDatabase());
     // get(child(dbRef, `users/${tmp[0]}`)).then((snapshot) => {
     //   if(snapshot.exists()) {
-    //     this.toastr.warning("User is exit!", "Warning");
+    //     this.toastr.warning("User already exists!", "Warning");
     //   } else {
     //     set(ref(this.database, 'users/' + tmp[0]), {
     //       email: this.user.email,

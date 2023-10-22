@@ -11,7 +11,8 @@
 /backend_bk
 /backend/node_modules
 /backend/.env
-/backend/flight-info-monster-backend-firebase-adminsdk-gho9h-813e72db51.json
+/backend/firebaseConfig.js
+/backend/firebaseAccountKey.json
 .github/workflows
 /frontend/npm-debug.log
 /frontend/yarn-error.log
