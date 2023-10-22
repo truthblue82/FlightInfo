@@ -79,7 +79,7 @@ import { Title } from '@angular/platform-browser';
       }
       .container2 {
         position: relative;
-        width: 80%;
+        width: 30%;
       }
 
       .image2 {

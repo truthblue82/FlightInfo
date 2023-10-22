@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   user: any[];
+
+  firstName:string;
+
   constructor() {
+    this.firstName = "Admin";
     this.user = [];
   }
 

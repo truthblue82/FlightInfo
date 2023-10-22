@@ -6,11 +6,11 @@ export const environment = {
   PWS_ENCRIPT_KEY: "encript",
   FIREBASE: {
     apiKey: "",
-    authDomain: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: "",
-    measurementId: ""
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
   }
 };

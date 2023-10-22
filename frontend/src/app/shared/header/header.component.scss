@@ -1,3 +1,24 @@
+.spacer {
+  flex: 1 1 auto;
+}
+.navbar-link{
+  color: #fff;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+ul {
+  display: flex;
+}
+//===
 .profileImg {
   border-radius: 250px;
   width: 28px;
