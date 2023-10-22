@@ -38,6 +38,7 @@
 /libpeerconnection.log
 testem.log
 /frontend/typings
+/frontend/src/environments/*
 
 # System files
 .DS_Store
