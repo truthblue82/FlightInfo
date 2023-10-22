@@ -4,6 +4,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { MatMenuModule } from "@angular/material/menu";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatIconModule } from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatCardModule} from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { environment } from 'src/environments/environment.prod';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
@@ -19,6 +31,7 @@ import { AddFlightComponent } from './pages/add-flight/add-flight.component';
 import { UpdateFlightComponent } from './pages/update-flight/update-flight.component';
 import { EncriptDecriptServiceService } from './services/encript-decript-service.service';
 import { ErrorComponent } from './pages/error/error.component';
+import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,12 +52,28 @@ import { ErrorComponent } from './pages/error/error.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatSnackBarModule,
     provideFirebaseApp(() => initializeApp(environment.FIREBASE)),
     provideDatabase(() => getDatabase()),
     ToastrModule.forRoot(),
   ],
   providers: [
-    EncriptDecriptServiceService
+    EncriptDecriptServiceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
