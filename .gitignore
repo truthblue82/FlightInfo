@@ -13,6 +13,7 @@
 /backend/.env
 /backend/firebaseConfig.js
 /backend/firebaseAccountKey.json
+/backend/.firebase
 .github/workflows
 /frontend/npm-debug.log
 /frontend/yarn-error.log

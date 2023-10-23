@@ -1,84 +1,10 @@
 <div class="signup">
-  <mat-card>
-    <mat-spinner color="primary" *ngIf="spinnerSvc.visibility | async"></mat-spinner>
-    <mat-card-header>
-      <h1>SIGN-UP</h1>
-    </mat-card-header>
-
-    <mat-card-content>
-      <form #registerForm="ngForm" (ngSubmit)="SignUp(registerForm)" ngNativeValidate>
-        <mat-form-field>
-          <mat-label for="email">Email</mat-label>
-          <input matInput type="email" placeholder="Email" name="email" required
-            #email (keyup)="validateEmail(email);enableSignupBtn()"
-            (blur)="validateEmail(email);enableSignupBtn()"
-            [(ngModel)]="user.email">
-          <mat-error *ngIf="!flags.email" >Invalid email.</mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label for="firstName">First Name</mat-label>
-          <input matInput type="text" placeholder="First Name" name="firstName" required
-            #firstName (keyup)="validateString(firstName, 'firstName');enableSignupBtn()"
-            (blur)="validateString(firstName, 'firstName');enableSignupBtn()"
-            [(ngModel)]="user.firstName" />
-            <mat-error *ngIf="!flags.firstName">Invalid firstname.</mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label for="lastName">Last Name</mat-label>
-          <input matInput type="text" placeholder="Last Name" name="lastName" required
-            #lastName (keyup)="validateString(lastName, 'lastName');enableSignupBtn()"
-            (blur)="validateString(lastName, 'lastName');enableSignupBtn()"
-            [(ngModel)]="user.lastName" />
-            <mat-error *ngIf="!flags.lasttName">Invalid lastname.</mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label for="password">Password</mat-label>
-          <input matInput [type]="phide ? 'password' : 'text'" placeholder="Password"
-            name="password" required [(ngModel)]="user.password" />
-          <button mat-icon-button matSuffix (click)="phide = !phide">
-            <mat-icon>{{phide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-          <mat-error *ngIf="!flags.password">Invalid password.</mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label for="repeatpassword">Repeat Password</mat-label>
-          <input matInput [type]="rphide ? 'password' : 'text'" placeholder="Repeat Password"
-            name="repeatpassword" required [(ngModel)]="repeatPassword"
-            (blur)="comparePassword(); enableSignupBtn()"
-            (keyup)="comparePassword(); enableSignupBtn()"/>
-          <button mat-icon-button matSuffix (click)="rphide = !rphide">
-            <mat-icon>{{rphide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-          <mat-error *ngIf="!flags.repeatPassword">Repeat password is not match</mat-error>
-        </mat-form-field>
-        <p style="font-weight: bolder; padding-bottom: 10px;">
-          By creating an account you agree to our
-          <a href="#" style="color: dodgerblue">Terms & Privacy</a>.
-        </p>
-        <div class="clearfix formbtn">
-          <button mat-raised-button [disabled]="!flags.signupBtn" color="primary">
-            REGISTER
-          </button>
-          <button mat-raised-button type="reset" color="warn" >
-            CANCEL
-          </button>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
-</div>
-
-<!-- <div class="signup">
   <div>
     <h1>SIGN-UP </h1>
 
     <div class="form" >
       <div>
-        <form #registerForm1="ngForm" (ngSubmit)="SignUp(registerForm1)" ngNativeValidate>
+        <form #registerForm="ngForm" (ngSubmit)="SignUp(registerForm)" ngNativeValidate>
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input class="form-control" type="email" placeholder="Enter Email" name="email" required
@@ -130,7 +56,7 @@
 
           <div class="clearfix formbtn">
               <button [disabled]="!flags.signupBtn"
-              class="btn btn-danger" >
+              class="btn btn-primary" >
                 REGISTER
               </button>
               <button type="reset" class="btn btn-warning" >
@@ -142,4 +68,4 @@
 
     </div>
   </div>
-</div> -->
+</div>

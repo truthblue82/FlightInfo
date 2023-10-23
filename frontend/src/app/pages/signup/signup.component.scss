@@ -15,17 +15,40 @@
   border: 0px solid #ccc;
   padding-top: 20px
 }
-mat-label {
-  margin: 0;
-  padding: 0;
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
-mat-card {
-  width: 95%;
-  margin: 10px auto;
-  padding: 10px
+.formbtn {
+  text-align: center;
+  margin-left: 46%;
+  transform: translateX(-30%);
+}
+.signup {
+  padding-top: 5em;
+  padding-bottom: 5em;
+  width: 40%;
+  margin: 0 auto;
+}
+.signup > div {
+  margin: auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 50px;
+  box-shadow: 0px 0px 10px #ccc;
+  text-align: center;
+}
+.signup > div h1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 28px;
+  font-weight: bolder;
+}
+.form-label {
+  float: left;
+  font-weight: bold;
 }
 
-mat-form-field {
-  width: 100%;
-}
 
