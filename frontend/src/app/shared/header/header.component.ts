@@ -6,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  user: any[];
-
+  user: any;
+  isLogined: boolean = false;
   firstName:string;
 
   constructor() {
     this.firstName = "Admin";
-    this.user = [];
+    this.user = '';
   }
 
   ngOnInit(): void {

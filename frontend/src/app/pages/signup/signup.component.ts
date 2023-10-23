@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgForm } from '@angular/forms';
 //import { Database, get, child, set, ref, onValue, getDatabase } from '@angular/fire/database';
 
 import { User } from 'src/app/models/User';
 import { EncriptDecriptServiceService } from 'src/app/services/encript-decript-service.service';
 import { environment } from 'src/environments/environment.prod';
-import { NgForm } from '@angular/forms';
+import { SpinnerService } from 'src/app/services/spinner.service';
+
 
 
 @Component({
@@ -20,7 +22,8 @@ export class SignupComponent implements OnInit {
   user: User;
   repeatPassword: string;
   displayModal: boolean = false;
-
+  phide:boolean = true;
+  rphide:boolean = true;
   flags: any = {
     email: true, firstName: true, lastName: true,
     password: true, repeatPassword: true,
@@ -30,8 +33,9 @@ export class SignupComponent implements OnInit {
   constructor(
     private appTitle: Title,
     //public database: Database,
-    public encDecSvc: EncriptDecriptServiceService,
+    //public encDecSvc: EncriptDecriptServiceService,
     private router: Router,
+    public spinnerSvc: SpinnerService,
     private toastr: ToastrService
   ) {
     this.appTitle.setTitle('Flight Info - Sign up');

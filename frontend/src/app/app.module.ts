@@ -32,6 +32,7 @@ import { UpdateFlightComponent } from './pages/update-flight/update-flight.compo
 import { EncriptDecriptServiceService } from './services/encript-decript-service.service';
 import { ErrorComponent } from './pages/error/error.component';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,12 @@ import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: SpinnerInterceptor,
       multi: true
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

@@ -17,7 +17,8 @@ export class AuthInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let token = environment.SERVICE_TOKEN;
+    let flightToken = environment.SERVICE_TOKEN;
+    //let appToken =
     //
     return next.handle(request);
   }

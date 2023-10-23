@@ -2,30 +2,32 @@
 <mat-toolbar color="primary">
   <a mat-button routerLink="/" class="navbar-link">Home</a>
 
-  <a mat-button routerLink="/add-flight" routerLinkActive="mat-primary">Add Flight</a>
+  <a mat-button *ngIf="isLogined" routerLink="/add-flight" routerLinkActive="mat-primary">Add Flight</a>
 
   <span class="spacer"></span>
 
-  <button mat-raised-button routerLink="/signup">Sign Up</button>
-  <button mat-raised-button routerLink="/signin">Sign In</button>
+  <button mat-raised-button *ngIf="!isLogined" routerLink="/signup">Sign Up</button>
+  <button mat-raised-button *ngIf="!isLogined" routerLink="/signin">Sign In</button>
 
-  <mat-chip [matMenuTriggerFor]="userMenu" color="accent">
-    <img matChipAvatar src="../../../assets/images/profilePhoto.jpg" class="profileImg" />
-    Welcome, {{firstName}}
-  </mat-chip>
-  <mat-menu #userMenu="matMenu">
+  <div *ngIf="isLogined">
+    <mat-chip [matMenuTriggerFor]="userMenu" color="accent">
+      <img matChipAvatar src="../../../assets/images/profilePhoto.jpg" class="profileImg" />
+      Welcome, {{firstName}}
+    </mat-chip>
+    <mat-menu #userMenu="matMenu">
 
-    <a mat-menu-item routerLink="/profile">
-      <mat-icon>person</mat-icon>
-      <span>Profile</span>
-    </a>
-    <hr class="navbar-divider" />
-    <a mat-menu-item (click)="handleSignOut();">
-      <mat-icon>exit_to_app</mat-icon>
-      <span>Sign out</span>
-    </a>
+      <a mat-menu-item routerLink="/profile">
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </a>
+      <hr class="navbar-divider" />
+      <a mat-menu-item (click)="handleSignOut();">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Sign out</span>
+      </a>
 
-  </mat-menu>
+    </mat-menu>
+  </div>
 </mat-toolbar>
 
 <!-- HEADER -->
