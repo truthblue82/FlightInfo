@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/User';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import jwt_decode from "jwt-decode";
 import { environment } from 'src/environments/environment.prod';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +18,41 @@ export class UserService {
     private router: Router
   ) {
     this.users = [];
-    let curEmail = sessionStorage.getItem('email') || '';
-    if(curEmail !== null && this.users.length > 0 ){
-      this.curUser = this.users.filter(u => u.email === curEmail)[0];
-      console.log('cur user', this.curUser);
+    let token = sessionStorage.getItem('token');
+    if(token !== null && this.curUser !== undefined ) {
+      let decoded:User = jwt_decode(token);
+      console.log(decoded);
+      this.curUser = {email: '', firstName: '', lastName: '', password: ''};
+      if(decoded) {
+        this.curUser = {
+          email: decoded.email,
+          firstName: decoded.firstName,
+          lastName: decoded.lastName,
+          password: ''
+        }
+        if(!this.users.findIndex(u => u.email === this.curUser?.email)) {
+          this.users.push(this.curUser);
+        }
+      }
     }
   }
 
   getCurrentUser() {
+    const token = sessionStorage.getItem('token') as string;
+    let decoded:User = jwt_decode(token);
+    console.log(decoded);
+    this.curUser = {email: '', firstName: '', lastName: '', password: ''};
+    if(decoded) {
+      this.curUser = {
+        email: decoded.email,
+        firstName: decoded.firstName,
+        lastName: decoded.lastName,
+        password: ''
+      }
+      if(!this.users.findIndex(u => u.email === this.curUser?.email)) {
+        this.users.push(this.curUser);
+      }
+    }
     return this.curUser;
   }
 

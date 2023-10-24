@@ -12,7 +12,7 @@
   <div *ngIf="isLogined">
     <mat-chip [matMenuTriggerFor]="userMenu" color="accent">
       <img matChipAvatar src="../../../assets/images/profilePhoto.jpg" class="profileImg" />
-      Welcome, {{firstName}}
+      Welcome, {{firstName}} {{lastName}}
     </mat-chip>
     <mat-menu #userMenu="matMenu">
 

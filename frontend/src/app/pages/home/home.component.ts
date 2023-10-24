@@ -41,7 +41,6 @@ import { Title } from '@angular/platform-browser';
         font-weight: bold;
         font-family: 'cursive';
       }
-
       .container {
         position: relative;
         margin-left: 40px;
@@ -81,13 +80,11 @@ import { Title } from '@angular/platform-browser';
         position: relative;
         width: 30%;
       }
-
       .image2 {
         display: block;
         width: 80%;
         height: auto;
       }
-
       .overlay2 {
         position: absolute;
         bottom: 0;
@@ -99,7 +96,6 @@ import { Title } from '@angular/platform-browser';
         height: 100%;
         transition: 0.5s ease;
       }
-
       .container2:hover .overlay2 {
         width: 80%;
       }
@@ -112,7 +108,7 @@ import { Title } from '@angular/platform-browser';
 export class HomeComponent implements OnInit {
 
   constructor(private appTitle: Title) {
-    this.appTitle.setTitle('Flight System - Home Page')
+    this.appTitle.setTitle('Flight System - Home Page');
   }
 
   ngOnInit(): void {
