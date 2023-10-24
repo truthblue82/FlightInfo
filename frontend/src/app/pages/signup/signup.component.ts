@@ -50,18 +50,18 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //
   }
 
-  SignUp(form: NgForm): void {
-
+  SignUp(): void {
     const user: User = {
       email: this.user.email,
       firstName: this.user.firstName,
       lastName: this.user.lastName,
       password: this.user.password
     };
-    this.userSvc.signUp(user).subscribe((result) => {
+    this.displayModal = true;
+    this.userSvc.signUp(user)
+    .subscribe((result) => {
       if(result.status === 200) {
         this.toastr.success('User Created Successfully', 'Please Login');
       } else {

@@ -9,7 +9,7 @@
 
     <div class="form" >
       <div>
-        <form #registerForm="ngForm" (ngSubmit)="SignUp(registerForm)" ngNativeValidate>
+        <form #registerForm="ngForm" (submit)="SignUp()" ngNativeValidate>
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input class="form-control" type="email" placeholder="Enter Email" name="email" required
@@ -60,8 +60,7 @@
           </p>
 
           <div class="clearfix formbtn">
-              <button [disabled]="!flags.signupBtn"
-              class="btn btn-primary" >
+              <button [disabled]="!flags.signupBtn" class="btn btn-primary" >
                 REGISTER
               </button>
               <button type="reset" class="btn btn-warning" >

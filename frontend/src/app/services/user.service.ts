@@ -35,12 +35,18 @@ export class UserService {
       );
   }
 
-  signIn(user: User) {
-    //
+  signIn(email: string, password:string) {
+    return this.http.post(
+      `${environment.REST_API_SERVICE}/users/login`,
+      {email, password},
+      {observe: 'response'}
+    );
   }
 
   storeSession(user: User): void {
     sessionStorage.setItem('email', user.email);
+    sessionStorage.setItem('firstName', user.firstName);
+    sessionStorage.setItem('lastName',user.lastName)
   }
 
   clearSession(): void {

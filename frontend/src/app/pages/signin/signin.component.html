@@ -8,11 +8,12 @@
     <h1>LOGIN</h1>
     <div class="form">
       <div class="container">
-        <form #signinForm="ngForm" (ngSubmit)="handleLogin(signinForm)" ngbNativeValidate>
+        <form #signinForm="ngForm" (submit)="handleLogin()" ngbNativeValidate>
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="text" class="form-control" placeholder="Enter Email" name="email"
-            (keyup)="validateEmail();enableSigninBtn()"
+            (keyup)="validateEmail();enableSigninBtn();"
+            (blur)="enableSigninBtn();"
             required [(ngModel)]="email"
             />
             <small *ngIf="!flagEmail" class="error">Invalid Email</small>
@@ -21,12 +22,13 @@
             <label for="password" class="form-label">PASSWORD</label>
             <input class="form-control" type="password"
               placeholder="Enter Password" name="password"
+              (keyup)="enableSigninBtn();" (blur)="enableSigninBtn();"
               required [(ngModel)]="password"
             />
           </div>
 
           <div class="clearfix formbtn">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" [disabled]="!this.signinBtn">
               LOGIN
             </button>
 
