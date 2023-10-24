@@ -40,7 +40,7 @@ export class UserService {
   getCurrentUser() {
     const token = sessionStorage.getItem('token') as string;
     let decoded:User = jwt_decode(token);
-    console.log(decoded);
+
     this.curUser = {email: '', firstName: '', lastName: '', password: ''};
     if(decoded) {
       this.curUser = {

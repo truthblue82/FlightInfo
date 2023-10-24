@@ -3,64 +3,82 @@
   <h3>Loading</h3>
 </div>
 
-<div class="all container">
+<div class="add-flight">
   <h1>Enter Flight Details</h1>
-  <form #flightForm="ngForm" (ngSubmit)="handleFormSubmit()" ngNativeValidate>
-    <div class="row">
-      <div class="card mt-4 cart-custom" >
+  <div class="form">
+    <form #flightForm="ngForm" (submit)="handleFormSubmit()" ngNativeValidate>
+      <div class="card mt-4 card-custom" >
         <div class="card-body">
           <div class="form-group">
-            <label for="airline">Airline</label>
+            <label for="airline" class="label">Airline</label>
             <input type="text" id="airline" name="airline"
               placeholder="Enter Airline"
-              [(ngModel)]="airline" required
+              #airline (keyup)="validateString(airline, 'airline');enableSubmitBtn();"
+              (blur)="validateString(airline,'airline');enableSubmitBtn();"
+              [(ngModel)]="flight.airline" required
             />
+            <small *ngIf="!flags.airline" class="error">Invalid Airline</small>
           </div>
 
           <div style="margin-top: 10px">
-            <label for="arrivalDate"
-            style="font-size: 18px; font-weight: bold; color: black">Arrival Date</label>
-            <div style="display: flex">
-              <input type="date"
-                name="arrivalDate" min="2000-01-02"
-                [(ngModel)]="arrivalDate" required
-              />
+            <div class="datetime">
+              <div style="width: 45%;">
+                <label for="arrivalDate" class="label">Arrival Date</label>
+                <input type="date" name="arrivalDate" min="2022-01-02"
+                #arrivalDate (keyup)="validateDate(arrivalDate);enableSubmitBtn()"
+                (blur)="validateDate(arrivalDate);enableSubmitBtn()"
+                [value]="flight.arrivalDate | date:'MM-dd-yyyy'" required
+                />
+                <small *ngIf="!flags.arrivalDate" class="error">Invalid arrival date</small>
+              </div>
 
-              <input type="time" id="arrivalTime"
-                name="arrivalTime"
-                [(ngModel)]="arrivalTime" required
-              />
+              <div style="width: 45%;">
+                <label for="arrivalTime" class="label">Arrival Time</label>
+                <input type="time" id="arrivalTime" name="arrivalTime"
+                #arrivalTime (keyup)="validateTime(arrivalTime);enableSubmitBtn()"
+                (blur)="validateTime(arrivalTime);enableSubmitBtn()"
+                  [(ngModel)]="flight.arrivalTime" required
+                />
+                <small *ngIf="!flags.arrivalTime" class="error">Invalid arrival time</small>
+              </div>
+
             </div>
           </div>
 
           <div class="form-group">
-            <label for="flightNumber">Flight Number</label>
+            <label for="flightNumber" class="label">Flight Number</label>
             <input type="text" id="flightNumber" name="flightNumber"
               placeholder="Enter Flight Number"
-              [(ngModel)]="flightNumber" required
+              #flightNumber (keyup)="validateString(flightNumber, 'flightNumber');enableSubmitBtn()"
+              (blur)="validateString(flightNumber, 'flightNumber');enableSubmitBtn()"
+              [(ngModel)]="flight.flightNumber" required
             />
+            <small *ngIf="!flags.flightNumber" class="error">Invalid flight number</small>
           </div>
 
           <div class="form-group">
-            <label for="numOfGuests">Number of guest</label>
-            <input type="text" name="numOfGuests"
-              placeholder="Enter Number Of Guest"
-              [(ngModel)]="numOfGuests" required
+            <label for="numOfGuests" class="label">Number of guest</label>
+            <input type="number" name="numOfGuests" pattern="[0-9]" min="1"
+              placeholder="Enter Number Of Guest" #numOfGuests
+              (keyup)="validateNumber(numOfGuests, 'numOfGuests');enableSubmitBtn()"
+              (blur)="validateNumber(numOfGuests, 'numOfGuests');enableSubmitBtn()"
+              [(ngModel)]="flight.numOfGuests" required
             />
+            <small *ngIf="!flags.numOfGuests" class="error">Invalid num of guests</small>
           </div>
           <div class="form-group">
-            <label for="comments">Comments</label>
+            <label for="comments" class="label">Comments</label>
             <textarea
               placeholder="Enter Comments If Any"
               name="comments"
-              [(ngModel)]="comments"
+              [(ngModel)]="flight.comments"
               required
             ></textarea>
           </div>
 
           <div class="clearfix formbtn">
-            <button type="submit" class="btn btn-danger">
-              LOGIN
+            <button type="submit" class="btn btn-danger" [disabled]="!flags.submitBtn">
+              SUBMIT
             </button>
 
             <button type="reset" class="btn btn-warning">
@@ -69,6 +87,8 @@
           </div>
         </div>
       </div>
-    </div>
-  </form>
+
+    </form>
+  </div>
+
 </div>

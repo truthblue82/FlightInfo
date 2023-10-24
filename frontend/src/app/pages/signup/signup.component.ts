@@ -3,7 +3,6 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
-//import { Database, get, child, set, ref, onValue, getDatabase } from '@angular/fire/database';
 
 import { User } from 'src/app/models/User';
 import { EncriptDecriptServiceService } from 'src/app/services/encript-decript-service.service';
@@ -24,8 +23,6 @@ export class SignupComponent implements OnInit {
   user: User;
   repeatPassword: string;
   displayModal: boolean = false;
-  phide:boolean = true;
-  rphide:boolean = true;
   flags: any = {
     email: true, firstName: true, lastName: true,
     password: true, repeatPassword: true,
@@ -34,8 +31,6 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private appTitle: Title,
-    //public database: Database,
-    //public encDecSvc: EncriptDecriptServiceService,
     private router: Router,
     private userSvc: UserService,
     private toastr: ToastrService
@@ -74,27 +69,6 @@ export class SignupComponent implements OnInit {
       this.toastr.error('Something went wrong!', 'Error');
       this.displayModal = false;
     });
-    //This for create user in realtime database directly
-    //const tmp = this.user.email.split('@');
-    //const pwdEnc = this.encDecSvc.set(environment.PWS_ENCRIPT_KEY, this.user.password);
-    //const dbRef = ref(getDatabase());
-    // get(child(dbRef, `users/${tmp[0]}`)).then((snapshot) => {
-    //   if(snapshot.exists()) {
-    //     this.toastr.warning("User already exists!", "Warning");
-    //   } else {
-    //     set(ref(this.database, 'users/' + tmp[0]), {
-    //       email: this.user.email,
-    //       firstName: this.user.firstName,
-    //       lastName: this.user.lastName,
-    //       password: pwdEnc
-    //     }).then(_ => {
-    //       this.toastr.success("User is created successful!", "Inform");
-    //       form.resetForm();
-    //       this.flags.signupBtn = false;
-    //       this.router.navigate(['/signin']);
-    //     })
-    //   }
-    // })
   }
 
   validateString(el: HTMLInputElement, name: string): void {

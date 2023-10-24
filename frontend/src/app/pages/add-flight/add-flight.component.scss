@@ -25,28 +25,65 @@ input[type="time"] {
   box-sizing: border-box;
   background-color: rgb(240, 240, 240);
 }
-.all {
-  padding: 20px;
+textarea {
+  height: 200px;
 }
-input[type="submit"] {
-  width: 100%;
-  background-color: #0f62df;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 19px;
+.label {
+  font-size: 18px; font-weight: bold; color: black;
+}
+.card-custom {
+  width: 60%;
+  margin: 0 auto;
+}
+.add-flight {
+  padding-top: 3em;
+  padding-bottom: 5em;
+  width: 60%;
+  margin: 0 auto;
+}
+.add-flight > h1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 28px;
+  font-weight: bolder;
+}
+.form {
+  border: 0px solid #ccc;
+  padding-top: 20px
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.formbtn {
+  text-align: center;
+  margin-left: 46%;
+  transform: translateX(-30%);
+}
+.add-flight > h1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 28px;
+  font-weight: bolder;
+  text-align: center;
+}
+.form-label {
+  float: left;
   font-weight: bold;
 }
-
-input[type="submit"]:hover {
-  background-color: #45a049;
+.datetime{
+  display: flex;
+  flex-direction: row;
 }
-textarea {
-  height: 230px;
-}
-.cart-custom {
-  max-width: 60%;
+@media only screen and (max-width:450px){
+  .datetime{
+    flex-direction: column;
+  }
+  .card-custom {
+    width: 100%;
+    margin: 0 auto;
+  }
 }
