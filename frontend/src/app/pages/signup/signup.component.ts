@@ -9,6 +9,8 @@ import { User } from 'src/app/models/User';
 import { EncriptDecriptServiceService } from 'src/app/services/encript-decript-service.service';
 import { environment } from 'src/environments/environment.prod';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { userGuard } from '../../guards/user.guard';
+import { UserService } from 'src/app/services/user.service';
 
 
 
@@ -35,7 +37,7 @@ export class SignupComponent implements OnInit {
     //public database: Database,
     //public encDecSvc: EncriptDecriptServiceService,
     private router: Router,
-    public spinnerSvc: SpinnerService,
+    private userSvc: UserService,
     private toastr: ToastrService
   ) {
     this.appTitle.setTitle('Flight Info - Sign up');
@@ -52,12 +54,27 @@ export class SignupComponent implements OnInit {
   }
 
   SignUp(form: NgForm): void {
+
     const user: User = {
       email: this.user.email,
       firstName: this.user.firstName,
       lastName: this.user.lastName,
       password: this.user.password
     };
+    this.userSvc.signUp(user).subscribe((result) => {
+      if(result.status === 200) {
+        this.toastr.success('User Created Successfully', 'Please Login');
+      } else {
+        this.toastr.error('User registered unsuccessfully!', 'Error');
+      }
+      this.displayModal = false;
+      this.router.navigate(['/']);
+    },
+    (error) => {
+      this.toastr.error('Something went wrong!', 'Error');
+      this.displayModal = false;
+    });
+    //This for create user in realtime database directly
     //const tmp = this.user.email.split('@');
     //const pwdEnc = this.encDecSvc.set(environment.PWS_ENCRIPT_KEY, this.user.password);
     //const dbRef = ref(getDatabase());

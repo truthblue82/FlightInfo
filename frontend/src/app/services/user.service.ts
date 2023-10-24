@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/User';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   users: User[];
-  curUser!: User;
+  curUser?: User;
 
-  constructor() {
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {
     this.users = [];
     let curEmail = sessionStorage.getItem('email') || '';
     if(curEmail !== null && this.users.length > 0 ){
@@ -22,7 +28,11 @@ export class UserService {
   }
 
   signUp(user: User) {
-    //
+    return this.http.post(
+      `${environment.REST_API_SERVICE}/users/signup`,
+      user,
+      {observe: 'response'}
+      );
   }
 
   signIn(user: User) {
@@ -39,6 +49,6 @@ export class UserService {
 
   logout(): void {
     sessionStorage.clear();
-    this.curUser = "";
+    this.curUser = undefined;
   }
 }

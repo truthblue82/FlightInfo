@@ -3,7 +3,7 @@ const firebase = require('firebase-admin');
 const jwt = require('jsonwebtoken');
 const { getDatabase } = require('firebase-admin/database');
 
-const serviceAccount = require("../firebaseAccountKey.json");
+const serviceAccount = require("../firebaseAccountKey2.json");
 firebase.initializeApp({
   credential: firebase.credential.cert(serviceAccount),
   databaseURL: process.env.FIREBASE_databaseURL,

@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = async (req, res, next) => {
-  console.log(req);
-  if (req.url === '/login' && req.url === '/signup' ) {
+
+  if (req.url === '/login' || req.url === '/signup' ) {
     next();
   } else if(req.url === '/flight') {
     console.log('call monster api');
