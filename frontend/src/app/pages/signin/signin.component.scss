@@ -64,9 +64,12 @@ hr{
   width: 50%;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  height: 150px;
 }
 .viaLink {
   margin: 0 auto;
 }
-
+.viaLink button {
+  text-align: center;
+}

@@ -28,9 +28,11 @@ export class AuthInterceptor implements HttpInterceptor {
       request = request.clone({
         setHeaders: {
           'Content-Type' : 'application/json',
+          'Cross-Origin-Opener-Policy':'same-origin, same-origin-allow-popups, unsafe-none',
           'Accept'       : 'application/json',
           'Authorization': `Bearer ${token}`,
-          'Access-Control-Allow-Origin': environment.APP_BASE_URL
+          'Access-Control-Allow-Origin': environment.APP_BASE_URL,
+          'Content-Security-Policy-Report-Only': 'script-src'
         }
       });
 

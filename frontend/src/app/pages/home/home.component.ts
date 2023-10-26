@@ -15,7 +15,6 @@ import { UserService } from 'src/app/services/user.service';
         flex-direction: row;
         justify-content: center;
         padding: 20px 0;
-        background-image: url(../../../assets/images/background_img1.jpg)
       }
       .top-left {
         position: absolute;
@@ -109,7 +108,7 @@ import { UserService } from 'src/app/services/user.service';
     `]
 })
 export class HomeComponent implements OnInit {
-  user?: User;
+  user: User;
   code!: string;
 
   constructor(
@@ -120,10 +119,9 @@ export class HomeComponent implements OnInit {
     ) {
     this.appTitle.setTitle('Flight System - Home Page');
     this.route.queryParams.subscribe(params => {
-      this.code = params['code'] || ''
+      this.code = params['code'] || '';
     });
-    console.log('code', this.code);
-    this.user = this.userSvc.getCurrentUser();
+    this.user = this.userSvc.getCurrentUser() as User;
   }
 
   ngOnInit(): void {
@@ -133,10 +131,23 @@ export class HomeComponent implements OnInit {
 
         if(result.token) {
           sessionStorage.setItem('token', result.token);
-          this.user = this.userSvc.getCurrentUser();
+          this.user = this.userSvc.getCurrentUser() as User;
           location.assign('/');
         }
       });
+    } else {
+      let ggLogedInUser = sessionStorage.getItem("ggLogedInUser");
+
+      if(ggLogedInUser) {
+        let tmp = JSON.parse(ggLogedInUser);
+        this.user = {
+          email: tmp.email,
+          firstName: tmp.given_name,
+          lastName: tmp.family_name,
+          exp: tmp.exp,
+        };
+        this.userSvc.storeSession(this.user);
+      }
     }
   }
 }

@@ -9,7 +9,6 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InputDialogComponent } from 'src/app/shared/input-dialog/input-dialog.component';
 
 
-
 @Component({
   selector: 'app-sigin',
   templateUrl: './signin.component.html',
@@ -45,7 +44,6 @@ export class SigninComponent implements OnInit {
     this.displayModal = true;
     this.userSvc.signIn(this.email, this.password)
     .subscribe((result) => {
-      console.log('result', result);
       if(result.status === 200) {
         this.toastr.success('User logged in Successfully', 'Inform');
         const data = result.body as any;
@@ -76,12 +74,11 @@ export class SigninComponent implements OnInit {
         }
       });
     inputDialog.afterClosed().subscribe(result => {
-      console.log('result dialog', result);
+
       if(result) {
       //process here for calling api
       this.userSvc.getEcryptedLink(result)
         .subscribe(response => {
-          console.log('response',response)
           if(response.status === 200 && response.ok === true) {
             const data = response.body;
             this.encryptedLink = data.loginUrl;
@@ -100,5 +97,8 @@ export class SigninComponent implements OnInit {
     this.signinBtn = this.email.length > 0
                     && this.flagEmail
                     && this.password.length > 0;
+  }
+
+  loginWithGoogle(): void {
   }
 }

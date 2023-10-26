@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+declare var googleSignout: any;
 
 @Component({
   selector: 'app-header',
@@ -28,6 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
   handleSignOut(): void {
+    googleSignout();
     this.userSvc.logout();
     location.assign('/');
   }

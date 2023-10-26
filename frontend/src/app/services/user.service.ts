@@ -68,6 +68,14 @@ export class UserService {
         }
       }
     }
+    if(sessionStorage.getItem('email')) {
+      this.curUser = {
+        email: sessionStorage.getItem('email') as string,
+        firstName: sessionStorage.getItem('firstName') as string,
+        lastName: sessionStorage.getItem('lastName') as string,
+        exp: sessionStorage.getItem('exp') as string
+      }
+    }
 
     return this.curUser;
   }
