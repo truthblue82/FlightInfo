@@ -4,7 +4,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { AddFlightComponent } from './pages/add-flight/add-flight.component';
-import { ErrorComponent } from './pages/error/error.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { userGuard } from './guards/user.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,11 +19,12 @@ const routes: Routes = [
   },
   {
     path: 'add-flight',
-    component: AddFlightComponent
+    component: AddFlightComponent,
+    canActivate: [userGuard]
   },
   {
-    path: 'error',
-    component: ErrorComponent
+    path: 'profile',
+    component: ProfileComponent
   },
   {
     path: '**',

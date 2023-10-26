@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { InputDialogComponent } from 'src/app/shared/input-dialog/input-dialog.component';
+
+
 
 @Component({
   selector: 'app-sigin',
@@ -18,8 +22,11 @@ export class SigninComponent implements OnInit {
   password: string;
   flagEmail: boolean = true;
   signinBtn: boolean = false;
+  encryptedLink: string = '';
+  message: string = '';
 
   constructor(
+    public dialog: MatDialog,
     private appTitle: Title,
     private router: Router,
     private userSvc: UserService,
@@ -47,7 +54,7 @@ export class SigninComponent implements OnInit {
         this.toastr.error('User logged in Unsuccessfully', 'Error');
       }
       this.displayModal = false;
-      this.router.navigate(['/']);
+      location.assign('/');
     },
     (error) => {
       this.toastr.error(error.error.error, 'Error');
@@ -56,6 +63,38 @@ export class SigninComponent implements OnInit {
   }
   validateEmail(): void {
     this.flagEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);
+  }
+  showDialog(): void {
+    let inputDialog = this.dialog.open(
+      InputDialogComponent,
+      {
+        data: {
+          title: "Get Encrypted Link",
+          message: 'Please input your email!',
+          input: '',
+          okBtn: 'Submit'
+        }
+      });
+    inputDialog.afterClosed().subscribe(result => {
+      console.log('result dialog', result);
+      if(result) {
+      //process here for calling api
+      this.userSvc.getEcryptedLink(result)
+        .subscribe(response => {
+          console.log('response',response)
+          if(response.status === 200 && response.ok === true) {
+            const data = response.body;
+            this.encryptedLink = data.loginUrl;
+            this.message = data.message;
+          } else {
+            this.toastr.error('Something went wrong!', 'Error');
+          }
+        },
+        (error) => {
+          this.toastr.error(error.error.error, 'Error');
+        });
+      }
+    })
   }
   enableSigninBtn(): void {
     this.signinBtn = this.email.length > 0

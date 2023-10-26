@@ -27,7 +27,8 @@
                 <input type="date" name="arrivalDate" min="2022-01-02"
                 #arrivalDate (keyup)="validateDate(arrivalDate);enableSubmitBtn()"
                 (blur)="validateDate(arrivalDate);enableSubmitBtn()"
-                [value]="flight.arrivalDate | date:'MM-dd-yyyy'" required
+                [(ngModel)]="flight.arrivalDate" required
+
                 />
                 <small *ngIf="!flags.arrivalDate" class="error">Invalid arrival date</small>
               </div>
@@ -77,7 +78,7 @@
           </div>
 
           <div class="clearfix formbtn">
-            <button type="submit" class="btn btn-danger" [disabled]="!flags.submitBtn">
+            <button type="submit" class="btn btn-primary" [disabled]="!flags.submitBtn">
               SUBMIT
             </button>
 

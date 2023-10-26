@@ -40,7 +40,12 @@ export class AddFlightComponent implements OnInit {
       console.log('result', result);
       if(result.status === 200 && result.ok === true) {
         this.toastr.success('Flight info is posted!', 'Inform');
+        this.flight = {
+          airline:'', arrivalDate: '', arrivalTime: '',
+          flightNumber: '', numOfGuests: 0, comments: ''
+        };
       } else this.toastr.error('Something went wrong!', 'Error');
+
       this.displayModal = false;
     },
     (error) => {
@@ -68,10 +73,7 @@ export class AddFlightComponent implements OnInit {
       if(tmp[0].length > 4 || tmp[0] > curYear.toString()) {
         this.flags.arrivalDate = false;
       } else {
-        //convert MM-DD-yyyy
-        //this.flight.arrivalDate = `${tmp[1]}-${tmp[2]}-${tmp[0]}`;
         this.flags.arrivalDate = true;
-        this.flight.arrivalDate = `${tmp[1]}-${tmp[2]}-${tmp[0]}`;
       }
     } else {
       this.flags.arrivalDate = false;

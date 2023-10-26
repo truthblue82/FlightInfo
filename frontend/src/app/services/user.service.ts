@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/User';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import jwt_decode from "jwt-decode";
 import { environment } from 'src/environments/environment.prod';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -21,7 +22,7 @@ export class UserService {
     let token = sessionStorage.getItem('token');
     if(token !== null && this.curUser !== undefined ) {
       let decoded:User = jwt_decode(token);
-      console.log(decoded);
+
       this.curUser = {email: '', firstName: '', lastName: '', password: ''};
       if(decoded) {
         this.curUser = {
@@ -39,20 +40,35 @@ export class UserService {
 
   getCurrentUser() {
     const token = sessionStorage.getItem('token') as string;
-    let decoded:User = jwt_decode(token);
+    if(token) {
+      let decoded:User = jwt_decode(token);
 
-    this.curUser = {email: '', firstName: '', lastName: '', password: ''};
-    if(decoded) {
-      this.curUser = {
-        email: decoded.email,
-        firstName: decoded.firstName,
-        lastName: decoded.lastName,
-        password: ''
-      }
-      if(!this.users.findIndex(u => u.email === this.curUser?.email)) {
-        this.users.push(this.curUser);
+      this.curUser = {email: '', firstName: '', lastName: '', password: ''};
+
+      //check expire date of token
+      if(decoded) {
+        let expDate = decoded.exp as string;
+        let curTime = Math.floor(new Date().getTime()/1000);
+        if(expDate > curTime.toString()) {
+          //still unexpire token
+          this.curUser = {
+            email: decoded.email,
+            firstName: decoded.firstName,
+            lastName: decoded.lastName,
+            password: '',
+            exp: decoded.exp
+          }
+          if(!this.users.findIndex(u => u.email === this.curUser?.email)) {
+            this.users.push(this.curUser);
+          }
+        } else {
+          //token expired
+          this.clearSession()
+          this.router.navigate(['/']);
+        }
       }
     }
+
     return this.curUser;
   }
 
@@ -85,5 +101,25 @@ export class UserService {
   logout(): void {
     sessionStorage.clear();
     this.curUser = undefined;
+    this.router.navigate(['/']);
+  }
+
+  getEcryptedLink(email: string): Observable<any> {
+    return this.http.post(
+      `${environment.REST_API_SERVICE}/users/link`,
+      {email},
+      {observe: 'response'}
+    );
+  }
+
+  authenWithCode(code: string): Observable<{token: string}> {
+    let headers = new HttpHeaders()
+                  .set('Authorization', `Bearer ${code}`);
+    let options = { headers: headers};
+    return this.http.post<{token: string}>(
+      `${environment.REST_API_SERVICE}/users/verify`,
+      {},
+      options
+    );
   }
 }

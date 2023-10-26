@@ -28,11 +28,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { AddFlightComponent } from './pages/add-flight/add-flight.component';
-import { UpdateFlightComponent } from './pages/update-flight/update-flight.component';
 import { EncriptDecriptServiceService } from './services/encript-decript-service.service';
-import { ErrorComponent } from './pages/error/error.component';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { InputDialogComponent } from './shared/input-dialog/input-dialog.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -43,8 +44,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     SignupComponent,
     SigninComponent,
     AddFlightComponent,
-    UpdateFlightComponent,
-    ErrorComponent
+    ProfileComponent,
+    InputDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,9 +66,13 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatDatepickerModule,
     MatChipsModule,
     MatSnackBarModule,
-    provideFirebaseApp(() => initializeApp(environment.FIREBASE)),
+    MatDialogModule,
     provideDatabase(() => getDatabase()),
     ToastrModule.forRoot(),
+  ],
+  exports: [
+    InputDialogComponent,
+    MatDialogModule
   ],
   providers: [
     EncriptDecriptServiceService,

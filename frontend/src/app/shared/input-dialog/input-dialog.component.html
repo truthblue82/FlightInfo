@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>
+  {{title}}
+</h1>
+
+<div mat-dialog-content>
+  <p>{{message}}</p>
+  <mat-form-field>
+    <mat-label>Your Input</mat-label>
+    <input matInput [(ngModel)]="input">
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="center">
+  <button mat-raised-button color="warn" (click)="onDismiss()">Dismiss</button>
+  <button mat-raised-button color="primary" (click)="onYes()">{{okBtn}}</button>
+</div>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/models/User';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -106,11 +109,34 @@ import { Title } from '@angular/platform-browser';
     `]
 })
 export class HomeComponent implements OnInit {
+  user?: User;
+  code!: string;
 
-  constructor(private appTitle: Title) {
+  constructor(
+    private appTitle: Title,
+    private userSvc: UserService,
+    private route: ActivatedRoute,
+    private router: Router
+    ) {
     this.appTitle.setTitle('Flight System - Home Page');
+    this.route.queryParams.subscribe(params => {
+      this.code = params['code'] || ''
+    });
+    console.log('code', this.code);
+    this.user = this.userSvc.getCurrentUser();
   }
 
   ngOnInit(): void {
+    if(this.code && this.user === undefined) {
+      this.userSvc.authenWithCode(this.code)
+      .subscribe((result: any) => {
+
+        if(result.token) {
+          sessionStorage.setItem('token', result.token);
+          this.user = this.userSvc.getCurrentUser();
+          location.assign('/');
+        }
+      });
+    }
   }
 }

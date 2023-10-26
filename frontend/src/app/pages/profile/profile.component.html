@@ -1,0 +1,27 @@
+<div class="loader-container" *ngIf="displayModal">
+  <div class="spinner-border text-light spinner-custom" role="status"></div>
+  <h3>Loading</h3>
+</div>
+
+<div class="All container">
+
+  <div class="mt-4 row">
+    <div class="card column center">
+      <h1>Your Information</h1>
+      <div class="card-body">
+        <div class="mb-3 mt-4">
+          <label class="form-label">Email</label>:
+          <label>{{user.email}}</label>
+        </div>
+        <div class="mb-3 mt-4">
+          <label class="form-label">First Name</label>:
+          <label>{{user.firstName}}</label>
+        </div>
+        <div class="mb-3 mt-4">
+          <label class="form-label">Last Name</label>:
+          <label>{{user.lastName}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,28 +10,25 @@ import { UserService } from 'src/app/services/user.service';
 export class HeaderComponent implements OnInit {
   user: any;
   isLogined: boolean = false;
-  firstName:string;
-  lastName:string;
+  firstName:string = '';
+  lastName:string = '';
 
   constructor(
     private userSvc: UserService,
     private router: Router
   ) {
-    this.user = this.userSvc.getCurrentUser();
-    this.firstName = this.user.firstName ?? '';
-    this.lastName = this.user.lastName ?? '';
-    this.isLogined = this.user ? true : false;
+    this.user = '';
   }
 
   ngOnInit(): void {
+    this.user = this.userSvc.getCurrentUser();
+    this.firstName = this.user?.firstName ?? '';
+    this.lastName = this.user?.lastName ?? '';
+    this.isLogined = this.user ? true : false;
   }
-
-  handleSignUp(): void {}
-
-  handleSignIn(): void {}
 
   handleSignOut(): void {
     this.userSvc.logout();
-    this.router.navigate(['/']);
+    location.assign('/');
   }
 }
