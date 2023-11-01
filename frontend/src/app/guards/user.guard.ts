@@ -10,10 +10,6 @@ export const userGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
 
   user = userSvc.getCurrentUser() ?? undefined;
   if(!user) {
-    let token = sessionStorage.getItem("ggLogedInUser");
-    if(token) {
-      return true;
-    }
     router.navigate(['/']);
     return false;
   } else {

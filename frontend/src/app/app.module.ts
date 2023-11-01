@@ -18,8 +18,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatChipsModule} from '@angular/material/chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { environment } from 'src/environments/environment.prod';
-import { provideDatabase, getDatabase } from '@angular/fire/database';
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -67,12 +65,10 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MatChipsModule,
     MatSnackBarModule,
     MatDialogModule,
-    provideDatabase(() => getDatabase()),
     ToastrModule.forRoot(),
   ],
   exports: [
-    InputDialogComponent,
-    MatDialogModule
+    InputDialogComponent
   ],
   providers: [
     EncriptDecriptServiceService,

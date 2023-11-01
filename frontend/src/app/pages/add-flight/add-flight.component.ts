@@ -37,7 +37,6 @@ export class AddFlightComponent implements OnInit {
 
     this.flightSvc.addFlight(this.flight)
     .subscribe((result) => {
-      console.log('result', result);
       if(result.status === 200 && result.ok === true) {
         this.toastr.success('Flight info is posted!', 'Inform');
         this.flight = {
@@ -63,13 +62,12 @@ export class AddFlightComponent implements OnInit {
     this.flags[name] = flag;
   }
   validateDate(el: HTMLInputElement):void {
-    console.log('date', el.value);
+
     let curYear = new Date().getFullYear() + 1;
     //current: yyyy-MM-DD
     let date = el.value;
     let tmp = date.split('-');
     if(tmp.length == 3) {
-      console.log('curYear', curYear);
       if(tmp[0].length > 4 || tmp[0] > curYear.toString()) {
         this.flags.arrivalDate = false;
       } else {
@@ -80,7 +78,7 @@ export class AddFlightComponent implements OnInit {
     }
   }
   validateTime(el: HTMLInputElement):void {
-    console.log('time', el.value);
+
     //hh:mm
     if(!el.value) {
       this.flags.arrivalTime = false;

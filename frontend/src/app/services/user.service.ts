@@ -109,7 +109,7 @@ export class UserService {
   logout(): void {
     sessionStorage.clear();
     this.curUser = undefined;
-    this.router.navigate(['/']);
+    location.assign('/');
   }
 
   getEcryptedLink(email: string): Observable<any> {
@@ -126,6 +126,17 @@ export class UserService {
     let options = { headers: headers};
     return this.http.post<{token: string}>(
       `${environment.REST_API_SERVICE}/users/verify`,
+      {},
+      options
+    );
+  }
+
+  loginWithGoogle(credentials: string): Observable<any> {
+    let headers = new HttpHeaders()
+                  .set('Authorization', `Bearer ${credentials}`);
+    let options = { headers: headers};
+    return this.http.post(
+      `${environment.REST_API_SERVICE}/users/googlelogin`,
       {},
       options
     );

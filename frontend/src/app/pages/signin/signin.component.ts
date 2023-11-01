@@ -7,7 +7,8 @@ import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InputDialogComponent } from 'src/app/shared/input-dialog/input-dialog.component';
-
+import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-sigin',
@@ -38,8 +39,42 @@ export class SigninComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //@ts-ignore
+    window.onGoogleLibraryLoad = () => {
+      //@ts-ignore
+      google.accounts.id.initialize({
+        client_id: environment.GOOGLE_CLIENT_ID,
+        callback: this.handleCredentialRespone.bind(this),
+        auto_select: false,
+        cancel_on_tap_outside: true
+      });
+      //@ts-ignore
+      google.accounts.id.renderButton(
+        //@ts-ignore
+        document.getElementById('google'),
+        {theme: 'filled_blue', size: 'medium', width: '160px', shape: 'pill', type:'standard'}
+      );
+      //@ts-ignore
+      google.accounts.id.prompt((notification: PromptMomentNotification) => {})
+    }
   }
-
+  handleCredentialRespone(response: CredentialResponse) {
+    this.userSvc.loginWithGoogle(response.credential).subscribe(
+      (result:any) => {
+        let token = result.token;
+        if(token) {
+          this.toastr.success('User Google logged in Successfully', 'Inform');
+          sessionStorage.setItem("token", token);
+          location.assign('/');
+        } else {
+          this.toastr.error('User Google logged in Unsuccessfully', 'Error');
+        }
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    )
+  }
   handleLogin(): void {
     this.displayModal = true;
     this.userSvc.signIn(this.email, this.password)
@@ -97,8 +132,5 @@ export class SigninComponent implements OnInit {
     this.signinBtn = this.email.length > 0
                     && this.flagEmail
                     && this.password.length > 0;
-  }
-
-  loginWithGoogle(): void {
   }
 }

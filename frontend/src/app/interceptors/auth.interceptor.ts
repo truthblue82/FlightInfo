@@ -56,7 +56,17 @@ export class AuthInterceptor implements HttpInterceptor {
             this.router.navigate(['/'], {queryParams: null});
           }
         }));
-    } else
+    } else {
+      request = request.clone({
+        setHeaders: {
+          'Content-Type' : 'application/json',
+          'Cross-Origin-Opener-Policy':'same-origin, same-origin-allow-popups, unsafe-none',
+          'Accept'       : 'application/json',
+          'Access-Control-Allow-Origin': environment.APP_BASE_URL,
+          'Content-Security-Policy-Report-Only': 'script-src'
+        }
+      });
       return next.handle(request);
+    }
   }
 }

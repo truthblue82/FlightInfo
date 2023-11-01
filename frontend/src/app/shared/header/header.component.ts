@@ -29,8 +29,6 @@ export class HeaderComponent implements OnInit {
   }
 
   handleSignOut(): void {
-    googleSignout();
     this.userSvc.logout();
-    location.assign('/');
   }
 }

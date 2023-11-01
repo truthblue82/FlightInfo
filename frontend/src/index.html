@@ -29,21 +29,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <script src="https://accounts.google.com/gsi/client" async></script>
-    <script>
-      function decodeJWTToken(token) {
-        return JSON.parse(atob(token.split(".")[1]));
-      }
-      function handleCredentialResponse(response) {
-        //to decode the credential response
-        const responPayload = decodeJWTToken(response.credential);
-        sessionStorage.setItem("ggLogedInUser", JSON.stringify(responPayload));
-      }
-      function googleSignout() {
-        google.accounts.id.disableAutoSelect();
-        sessionStorage.removeItem("ggLogedInUser");
-      }
-    </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
